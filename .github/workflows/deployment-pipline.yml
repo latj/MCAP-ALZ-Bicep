@@ -61,28 +61,28 @@ jobs:
       #     deploymentName: create_rbac_roles-${{ env.runNumber }}
       #     failOnStdErr: false
 
-      # - name: Deploy Logging Resource Group
-      #   id: create_logging_rg
-      #   uses: azure/arm-deploy@v1
-      #   with:
-      #     scope: subscription
-      #     subscriptionId: ${{ env.LoggingSubId }}
-      #     region: ${{ env.Location }}
-      #     template: infra-as-code/bicep/modules/resourceGroup/resourceGroup.bicep
-      #     parameters: parResourceGroupName=${{ env.LoggingResourceGroupName }} parLocation=${{ env.Location }}
-      #     deploymentName: create_logging_rg-${{ env.runNumber }}
-      #     failOnStdErr: false
+      - name: Deploy Logging Resource Group
+        id: create_logging_rg
+        uses: azure/arm-deploy@v1
+        with:
+          scope: subscription
+          subscriptionId: ${{ env.LoggingSubId }}
+          region: ${{ env.Location }}
+          template: infra-as-code/bicep/modules/resourceGroup/resourceGroup.bicep
+          parameters: parResourceGroupName=${{ env.LoggingResourceGroupName }} parLocation=${{ env.Location }}
+          deploymentName: create_logging_rg-${{ env.runNumber }}
+          failOnStdErr: false
 
-      # - name: Deploy Logging
-      #   id: create_logging
-      #   uses: azure/arm-deploy@v1
-      #   with:
-      #     subscriptionId: ${{ env.LoggingSubId }}
-      #     resourceGroupName: ${{ env.LoggingResourceGroupName }}
-      #     template: infra-as-code/bicep/modules/logging/logging.bicep
-      #     parameters: infra-as-code/bicep/modules/logging/parameters/logging.parameters.all.json
-      #     deploymentName: create_logging-${{ env.runNumber }}
-      #     failOnStdErr: false
+      - name: Deploy Logging
+        id: create_logging
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ env.LoggingSubId }}
+          resourceGroupName: ${{ env.LoggingResourceGroupName }}
+          template: infra-as-code/bicep/modules/logging/logging.bicep
+          parameters: infra-as-code/bicep/modules/logging/parameters/logging.parameters.all.json
+          deploymentName: create_logging-${{ env.runNumber }}
+          failOnStdErr: false
 
       # - name: Deploy Hub Networking Resource Group
       #   id: create_hub_network_rg
